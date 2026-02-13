@@ -1,7 +1,7 @@
 
 # Basic Rock Paper Scissors Game
 # Name: Lis Reitmeyer
-# Date: 2/13/26
+# Date: 2/20/26
 
 import random
 
@@ -18,18 +18,6 @@ from rich.console import Console
 from rich.text import Text
 
 # Create a Console object for rich output
-console = Console()
-"""
-main.py (Starter Template)
--------------------------
-Rock Paper Scissors game for CS101 Fall 2025 Lab 02.
-
-Complete the TO-DOs to finish the game!
-"""
-
-import random
-from rich.console import Console
-
 console = Console()
 
 choices = ['rock', 'paper', 'scissors']
@@ -73,8 +61,8 @@ def print_round_result(user_choice, computer_choice, result):
 	"""Print the choices and the winner of the round using rich colors."""
 	console.print(f"[magenta]Computer chose: {computer_choice}[/magenta]")
 	console.print(f"[magenta]You chose: {user_choice}[/magenta]")
-	print()
 
+	# Tells program which result to print
 	if result == "tie":
 		console.print("[blue]It's a tie![/blue]")
 	elif result == "win":
@@ -84,9 +72,16 @@ def print_round_result(user_choice, computer_choice, result):
 
 def main():
 	"""Main function to run the game for 3 rounds and print the final result."""
+	# Initializes scores to 0 and allows user to choose number of rounds
 	user_score = 0
 	computer_score = 0
-	rounds = 3
+	rounds = int(input("How many rounds would you like to play? (1-5): "))
+	if rounds < 1:
+		rounds = 1
+	elif rounds > 5:
+		rounds = 5
+	else:
+		rounds = rounds
 
 	console.print("[bold cyan]Welcome to Rock, Paper, Scissors![/bold cyan]")
 	console.print("[green]You can type 'rock', 'paper', 'scissors' or use 1 for rock, 2 for paper, 3 for scissors.[/green]")
@@ -103,11 +98,12 @@ def main():
 		elif result == "loss":
 			computer_score += 1
 	
-	# end of game, reveals results and prints them with nice formatting
+	# End of game, reveals results and prints them with nice formatting
 	console.print("\n[bold underline]Game Over![/bold underline]")
 	console.print(f"[cyan]Your score: {user_score}[/cyan]")
 	console.print(f"[magenta]Computer score: {computer_score}[/magenta]")
 
+	# Tells the program which result to print
 	if user_score > computer_score:
 		console.print("[bold green]Congratulations, you win the game![/bold green]")
 	elif user_score < computer_score:
